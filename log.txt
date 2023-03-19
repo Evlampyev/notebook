@@ -1,0 +1,14 @@
+Sun Mar 19 23:42:26 YEKT 2023 : Идентафикатор: 3
+Имя: SERGO,
+Фамилия: VANO,
+Телефон: 654
+Sun Mar 19 23:48:13 YEKT 2023 : CREATE Идентафикатор: 4 Имя: XO, Фамилия: XOXOXO, Телефон: 654321
+Mon Mar 20 00:07:11 YEKT 2023 : READ
+Mon Mar 20 00:08:06 YEKT 2023 : UPDATE Идентафикатор: null
+Имя: SIDRO,
+Фамилия: SIDOROV,
+Телефон: 123
+Mon Mar 20 00:10:10 YEKT 2023 : CREATE Идентафикатор: 5
+Имя: QWERTY,
+Фамилия: VANOVI,
+Телефон: 987

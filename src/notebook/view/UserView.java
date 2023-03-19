@@ -4,8 +4,10 @@ import notebook.controller.UserController;
 import notebook.model.User;
 import notebook.util.Commands;
 
-import java.util.List;
+
 import java.util.Scanner;
+
+import static notebook.log.log.writeLog;
 
 public class UserView {
     private final UserController userController;
@@ -14,7 +16,7 @@ public class UserView {
         this.userController = userController;
     }
 
-    public void run(){
+    public void run() {
         Commands com;
 
         while (true) {
@@ -23,35 +25,26 @@ public class UserView {
             if (com == Commands.EXIT) return;
             switch (com) {
                 case CREATE:
-                    String firstName = prompt("Имя: ");
-                    String lastName = prompt("Фамилия: ");
-                    String phone = prompt("Номер телефона: ");
-                    userController.saveUser(new User(firstName, lastName, phone));
+                    User u = createUser();
+                    userController.saveUser(u);
+                    writeLog(com.toString() + " " + u.toString());
                     break;
                 case READ:
                     String id = prompt("Идентификатор пользователя: ");
                     try {
                         User user = userController.readUser(Long.parseLong(id));
+                        writeLog(com.toString());
                         System.out.println(user);
                         System.out.println();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                     break;
-                case LIST:
-                    List<User> users = userController.getAllUsers();
-                    for(User user: users) {
-                        System.out.println(user);
-                    }
-                    break;
                 case UPDATE:
-                    long userId = Long.parseLong(prompt("Input id users: "));
-                    String updateName = prompt("Имя: ");
-                    String updateLastName = prompt("Фамилия: ");
-                    String updatePhone = prompt("Номер телефона: ");
-                    User updatedUser = new User(updateName, updateLastName, updatePhone);
-                    userController.userUpdate(userId, updatedUser);
-                    break;
+                    String userId = prompt("Идентификатор пользователя: ");
+                    User up = createUser();
+                    writeLog(com.toString() + " " + up.toString());
+                    userController.updateUser(userId, up);
             }
         }
     }
@@ -60,5 +53,12 @@ public class UserView {
         Scanner in = new Scanner(System.in);
         System.out.print(message);
         return in.nextLine();
+    }
+
+    private User createUser() {
+        String firstName = prompt("Имя: ");
+        String lastName = prompt("Фамилия: ");
+        String phone = prompt("Номер телефона: ");
+        return new User(firstName, lastName, phone);
     }
 }

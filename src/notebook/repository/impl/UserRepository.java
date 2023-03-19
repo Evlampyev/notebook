@@ -1,15 +1,18 @@
 package notebook.repository.impl;
 
+
 import notebook.dao.impl.FileOperation;
 import notebook.mapper.impl.UserMapper;
 import notebook.model.User;
 import notebook.repository.GBRepository;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepository implements GBRepository<User, Long> {
+
+public class UserRepository implements GBRepository {
     private final UserMapper mapper;
     private final FileOperation operation;
 
@@ -41,11 +44,7 @@ public class UserRepository implements GBRepository<User, Long> {
         long next = max + 1;
         user.setId(next);
         users.add(user);
-        List<String> lines = new ArrayList<>();
-        for (User u: users) {
-            lines.add(mapper.toInput(u));
-        }
-        operation.saveAll(lines);
+        write(users);
         return user;
     }
 
@@ -55,22 +54,17 @@ public class UserRepository implements GBRepository<User, Long> {
     }
 
     @Override
-    public Optional<User> update(Long id, User update) {
-        try {
-            List<User> users = findAll();
-            User updateUser = users.stream().filter(u -> u.getId().equals(id)).findFirst().get();
-            updateUser.setFirstName(update.getFirstName());
-            updateUser.setLastName(update.getLastName());
-            updateUser.setPhone(update.getPhone());
-            List<String> list = new ArrayList<>();
-            for(User user: users) {
-                list.add(mapper.toInput(user));
-            }
-            operation.saveAll(list);
-            return Optional.of(updateUser);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public Optional<User> update(Long userId, User update) {
+        List<User> users = findAll();
+        User editUser = users.stream()
+                .filter(u -> u.getId()
+                        .equals(userId))
+                .findFirst().orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+        editUser.setFirstName(update.getFirstName());
+        editUser.setLastName(update.getLastName());
+        editUser.setPhone(update.getPhone());
+        write(users);
+        return Optional.of(update);
     }
 
     @Override
@@ -78,7 +72,12 @@ public class UserRepository implements GBRepository<User, Long> {
         return false;
     }
 
-    public UserMapper getMapper() {
-        return mapper;
+    private void write(List<User> users) {
+        List<String> lines = new ArrayList<>();
+        for (User u: users) {
+            lines.add(mapper.toInput(u));
+        }
+        operation.saveAll(lines);
     }
+
 }
