@@ -40,11 +40,28 @@ public class UserView {
                         throw new RuntimeException(e);
                     }
                     break;
+                case HELP:
+                    System.out.println(java.util.Arrays.asList(Commands.values()));
+                    writeLog(com.toString() + " HELP");
+                    break;
+                case DELETE:
+                    String del_id = prompt("Идентификатор пользователя: ");
+                    Boolean rezultDelete = userController.deleteUser(Long.parseLong(del_id));
+                    writeLog(com.toString() + " " + del_id + " " + rezultDelete);
+                    if (rezultDelete) {
+                        System.out.printf("User", del_id, "deleted");
+                    }
+                    break;
                 case UPDATE:
                     String userId = prompt("Идентификатор пользователя: ");
                     User up = createUser();
                     writeLog(com.toString() + " " + up.toString());
                     userController.updateUser(userId, up);
+                    break;
+                default:
+                    System.out.println("You can use only next command:");
+                    System.out.println(java.util.Arrays.asList(Commands.values()));
+                    break;
             }
         }
     }

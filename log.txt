@@ -12,3 +12,28 @@ Mon Mar 20 00:10:10 YEKT 2023 : CREATE Идентафикатор: 5
 Имя: QWERTY,
 Фамилия: VANOVI,
 Телефон: 987
+Sun Apr 02 20:52:44 YEKT 2023 : CREATE Идентафикатор: 1
+Имя: Vano,
+Фамилия: sergo,
+Телефон: 123
+Sun Apr 02 20:52:54 YEKT 2023 : READ
+Sun Apr 02 20:57:11 YEKT 2023 : READ
+Sun Apr 02 21:22:26 YEKT 2023 : CREATE Идентафикатор: 2
+Имя: IVAN,
+Фамилия: PETROV,
+Телефон: 321
+Sun Apr 02 21:22:40 YEKT 2023 : CREATE Идентафикатор: 3
+Имя: SIDR,
+Фамилия: SIDOROV,
+Телефон: 654
+Sun Apr 02 21:22:44 YEKT 2023 : READ
+Sun Apr 02 21:22:50 YEKT 2023 : DELETE false
+Sun Apr 02 21:22:59 YEKT 2023 : READ
+Sun Apr 02 21:25:10 YEKT 2023 : READ
+Sun Apr 02 21:25:14 YEKT 2023 : DELETE false
+Sun Apr 02 21:25:18 YEKT 2023 : READ
+Sun Apr 02 21:29:25 YEKT 2023 : DELETE true
+Sun Apr 02 21:29:29 YEKT 2023 : READ
+Sun Apr 02 21:37:57 YEKT 2023 : DELETE true
+Sun Apr 02 21:38:10 YEKT 2023 : DELETE true
+Sun Apr 02 21:38:15 YEKT 2023 : READ
